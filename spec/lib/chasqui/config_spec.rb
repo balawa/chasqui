@@ -6,7 +6,7 @@ describe Chasqui::Config do
     it { expect(subject.channel_prefix).to be nil }
     it { expect(subject.default_queue).to eq('chasqui-workers') }
     it { expect(subject.inbox_queue).to eq('chasqui-inbox') }
-    it { expect(subject.redis.client.db).to eq(0) }
+    it { expect(subject.redis._client.db).to eq(0) }
     it { expect(subject.broker_poll_interval).to eq(3) }
     it { expect(subject.queue_adapter).to eq(Chasqui::QueueAdapter::RedisQueueAdapter) }
 
@@ -49,18 +49,18 @@ describe Chasqui::Config do
     it 'accepts config options' do
       redis_config = { host: '10.0.3.24' }
       subject.redis = redis_config
-      expect(subject.redis.client.host).to eq('10.0.3.24')
+      expect(subject.redis._client.host).to eq('10.0.3.24')
     end
 
     it 'accepts an initialized client' do
       redis = Redis.new db: 2
       subject.redis = redis
-      expect(subject.redis.client.db).to eq(2)
+      expect(subject.redis._client.db).to eq(2)
     end
 
     it 'accepts URLs' do
       subject.redis = 'redis://10.0.1.21:12345/0'
-      expect(subject.redis.client.host).to eq('10.0.1.21')
+      expect(subject.redis._client.host).to eq('10.0.1.21')
     end
 
     it 'uses a namespace' do

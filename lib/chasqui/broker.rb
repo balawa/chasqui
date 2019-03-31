@@ -17,7 +17,7 @@ class Chasqui::Broker
     # 1. subscribers may use a different (or no) redis namespace than chasqui
     # 2. sharing the connection with unsuspecting clients could result in
     #    the broker blocking forever
-    @redis = Redis.new @config.redis.client.options
+    @redis = Redis.new @config.redis._client.options
   end
 
   def start

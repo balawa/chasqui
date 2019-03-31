@@ -25,7 +25,7 @@ describe Chasqui::CLI do
         expect(cli.redis_url).to eq('redis://10.0.0.23:6379/5')
 
         cli.configure
-        expect(Chasqui.redis.redis.client.host).to eq('10.0.0.23')
+        expect(Chasqui.redis.redis._client.host).to eq('10.0.0.23')
     end
 
     it 'changes the inbox queue' do
@@ -67,7 +67,7 @@ describe Chasqui::CLI do
 
       expect(Chasqui.logger.level).to eq(Logger::DEBUG)
       expect(Chasqui.inbox_queue).to eq('inbox2')
-      expect(Chasqui.redis.client.host).to eq('127.0.0.1')
+      expect(Chasqui.redis._client.host).to eq('127.0.0.1')
     end
   end
 
